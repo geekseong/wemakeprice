@@ -19,7 +19,7 @@ public class StringUtilTest {
     }
 
     @Test
-    public void 숫자_판별_테스트() {
+    public void 숫자_소문자_대문자_판별_테스트() {
         String number = "1234567890";
         String lowercase = "qwertyuiopasdfghjklzxcvbnm";
         String uppercase = "QWERTYUIOPASDFGHJKLZXCVBNM";
@@ -47,8 +47,5 @@ public class StringUtilTest {
             assertThat(StringUtil.isLowerCase(ch), equalTo(false));
             assertThat(StringUtil.isUpperCase(ch), equalTo(true));
         }
-
-
-
     }
 }

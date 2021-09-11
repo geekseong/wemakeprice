@@ -5,6 +5,10 @@ import com.practice.wemakeprice.utils.StringUtil;
 import com.practice.wemakeprice.vo.alphabet.AlphabetPairListVo;
 import com.practice.wemakeprice.vo.number.NumberListVo;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class PageParseResultVo {
     private final NumberListVo numberListVo;
     private final AlphabetPairListVo alphabetPairListVo;
@@ -35,6 +39,36 @@ public class PageParseResultVo {
 
     public String getCrossStringResult() {
         return this.crossStringResult;
+    }
+    public Result getResult(int chunkNum) {
+        return new Result(chunkNum, crossStringResult);
+    }
+
+    public class Result{
+        private final String quotient;
+        private final String remainder;
+
+        public Result(int chunkNum, String crossStringResult) {
+
+            int q = crossStringResult.length() / chunkNum;
+            StringBuilder builder = new StringBuilder();
+            int offset = 0;
+            List<String> chunkList = new ArrayList<>();
+            for (; offset < q * chunkNum; offset += chunkNum) {
+                chunkList.add(crossStringResult.substring(offset, offset + chunkNum));
+            }
+
+            this.quotient = chunkList.stream().collect(Collectors.joining(","));
+            this.remainder = crossStringResult.substring(offset);
+        }
+
+        public String getQuotient() {
+            return quotient;
+        }
+
+        public String getRemainder() {
+            return remainder;
+        }
     }
 
     private class NumberAlphabetSplit{

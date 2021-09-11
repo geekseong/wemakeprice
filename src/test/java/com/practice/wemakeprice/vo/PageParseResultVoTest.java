@@ -21,4 +21,22 @@ public class PageParseResultVoTest {
         assertThat(result.getCrossStringResult(), equalTo(expect));
     }
 
+    @Test
+    public void 교차출력문자열_몫_나머지_테스트() {
+
+        // given
+        int chunkNumber = 10;
+        String expectedQuotient = "A0a1B2b3C4,c5D6d7E8e9,FfGgHhIiJj,KkLlMmNnOo,PpQqRrSsTt,UuVvWwXxYy";
+        String expectedRemainder = "Zz";
+        PageParseResultVo pageParseResultVo = new PageParseResultVo(tc);
+
+        //when
+        PageParseResultVo.Result result = pageParseResultVo.getResult(chunkNumber);
+
+        //then
+        assertThat(result.getQuotient(), equalTo(expectedQuotient));
+        assertThat(result.getRemainder(), equalTo(expectedRemainder));
+
+    }
+
 }

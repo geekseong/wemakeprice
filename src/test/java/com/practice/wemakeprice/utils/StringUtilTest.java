@@ -34,7 +34,7 @@ public class StringUtilTest {
 
         // 소문자 검증
         for (int i = 0; i < lowercase.length(); ++i) {
-            char ch = number.charAt(i);
+            char ch = lowercase.charAt(i);
             assertThat(StringUtil.isNumber(ch), equalTo(false));
             assertThat(StringUtil.isLowerCase(ch), equalTo(true));
             assertThat(StringUtil.isUpperCase(ch), equalTo(false));
@@ -42,7 +42,7 @@ public class StringUtilTest {
 
         // 대문자 검증
         for (int i = 0; i < uppercase.length(); ++i) {
-            char ch = number.charAt(i);
+            char ch = uppercase.charAt(i);
             assertThat(StringUtil.isNumber(ch), equalTo(false));
             assertThat(StringUtil.isLowerCase(ch), equalTo(false));
             assertThat(StringUtil.isUpperCase(ch), equalTo(true));

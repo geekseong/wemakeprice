@@ -1,6 +1,6 @@
 package com.practice.wemakeprice.vo.number;
 
-import com.practice.wemakeprice.exception.EmptyException;
+import com.practice.wemakeprice.exception.number.NumberEmptyException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -41,10 +41,10 @@ public class NumberListVoTest {
 
         //when
         numberListVo.getNextNumber();
-        EmptyException emptyException = assertThrows(EmptyException.class, () -> {
+        NumberEmptyException numberEmptyException = assertThrows(NumberEmptyException.class, () -> {
             numberListVo.getNextNumber();
         });
 
-        assertThat(emptyException.getMessage(), equalTo("모든 숫자를 소진하였습니다."));
+        assertThat(numberEmptyException.getMessage(), equalTo("모든 숫자를 소진하였습니다."));
     }
 }

@@ -1,10 +1,9 @@
 package com.practice.wemakeprice.vo.number;
 
-import com.practice.wemakeprice.exception.EmptyException;
+import com.practice.wemakeprice.exception.number.NumberEmptyException;
 import com.practice.wemakeprice.exception.UnSupportedCharacterException;
 import com.practice.wemakeprice.utils.StringUtil;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -47,7 +46,7 @@ public class NumberListVo {
 
     public int getNextNumber() {
         if( this.isAllNumberEmpty() )
-            throw new EmptyException("모든 숫자를 소진하였습니다.");
+            throw new NumberEmptyException("모든 숫자를 소진하였습니다.");
 
         int num = this.numberVoList.get(0).consume();
         if (this.numberVoList.get(0).isEmpty()) {

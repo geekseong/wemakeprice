@@ -1,6 +1,6 @@
 package com.practice.wemakeprice.vo.number;
 
-import com.practice.wemakeprice.exception.EmptyException;
+import com.practice.wemakeprice.exception.number.NumberEmptyException;
 
 class NumberVo {
     private final int num;
@@ -32,6 +32,6 @@ class NumberVo {
             this.count--;
             return this.num;
         }
-        throw new EmptyException(num + "을 모두 소진하였습니다.");
+        throw new NumberEmptyException(num + "을 모두 소진하였습니다.");
     }
 }

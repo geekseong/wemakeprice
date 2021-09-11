@@ -44,7 +44,7 @@ public class NumberListVo {
         return numberVoList.isEmpty();
     }
 
-    public int getNextNumber() {
+    public int consume() {
         if( this.isAllNumberEmpty() )
             throw new NumberEmptyException("모든 숫자를 소진하였습니다.");
 

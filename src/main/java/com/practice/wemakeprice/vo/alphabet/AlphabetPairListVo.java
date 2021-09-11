@@ -58,7 +58,7 @@ public class AlphabetPairListVo {
         return alphabetPairVoList;
     }
 
-    private boolean isAllAlphabetEmpty() {
+    public  boolean isAllAlphabetEmpty() {
         return this.alphabetPairVoList.isEmpty();
     }
 

@@ -22,7 +22,7 @@ public class NumberListVoTest {
         // when
         NumberListVo numberListVo = new NumberListVo(number);
         while (!numberListVo.isAllNumberEmpty()) {
-            int nextNum = numberListVo.getNextNumber();
+            int nextNum = numberListVo.consume();
             numCountArr[nextNum]--;
         }
 
@@ -40,9 +40,9 @@ public class NumberListVoTest {
         NumberListVo numberListVo = new NumberListVo(number);
 
         //when
-        numberListVo.getNextNumber();
+        numberListVo.consume();
         NumberEmptyException numberEmptyException = assertThrows(NumberEmptyException.class, () -> {
-            numberListVo.getNextNumber();
+            numberListVo.consume();
         });
 
         assertThat(numberEmptyException.getMessage(), equalTo("모든 숫자를 소진하였습니다."));

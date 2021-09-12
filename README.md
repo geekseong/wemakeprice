@@ -1,9 +1,15 @@
-#[위메프] 코딩과제
+# [위메프] 코딩과제
 
 ### 프로그래밍 환경
 - java 1.8
 - spring boot 2.5.4
 - junit5
+
+### 어플리케이션 환경
+- server port : 8080
+- 프론트 페이지 경로 : localhost:8080
+- intellij 특정 버전에서 Lombok 에러 발생으로 인해 Lombok은 사용하지 않고 구현
+- type이 추가될것을 고려하여 Paser 추상체를 상속받아 구현체별로 파싱방식을 다르게 구현 할 수 있도록 개발하였음.
 
 ### 요구사항 정리
 - 사용자의 http request 받을 수 있다. request body에 포함되는 항목은 다음과 같다.

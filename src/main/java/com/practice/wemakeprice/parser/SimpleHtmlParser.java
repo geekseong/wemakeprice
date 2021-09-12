@@ -2,10 +2,10 @@ package com.practice.wemakeprice.parser;
 
 import com.practice.wemakeprice.infra.WebRequest;
 
-public class SimpleHtmlParser extends ParserTemplate {
+public class SimpleHtmlParser extends Parser {
 
-    public SimpleHtmlParser(WebRequest webRequest) {
-        super(webRequest);
+    public SimpleHtmlParser(WebRequest webRequest, int chunkNum) {
+        super(webRequest, chunkNum);
     }
 
     @Override

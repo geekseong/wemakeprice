@@ -25,29 +25,31 @@ public class RemoveHtmlTagParserTest {
 
     @ParameterizedTest
     @MethodSource("testcase")
-    public void HTML_태그_제거_테스트(String input, String expected) {
+    public void HTML_태그_제거_테스트(String input, int chunkNum,  String expectedQ, String expectedR) {
 
         //stubbing
         when(webRequest.get()).thenReturn(input);
 
         // given
-        RemoveHtmlTagParser removeHtmlTagParser = new RemoveHtmlTagParser(webRequest);
+        Parser removeHtmlTagParser = new RemoveHtmlTagParser(webRequest, chunkNum);
 
         // when
-        String cleanData = removeHtmlTagParser.parse();
+        Parser.Result result = removeHtmlTagParser.parse();
 
         // then
-        assertThat(cleanData, equalTo(expected));
+        assertThat(result.getQuotient(), equalTo(expectedQ));
+        assertThat(result.getRemainder(), equalTo(expectedR));
+
     }
 
     // 검증을 위한 테스트 케이스.
     private static Stream<Arguments> testcase() { // argument source method
         return Stream.of(
-                Arguments.of("<head><title>위메프 사전과제!@#$%^&*();`~:\'\"</title></head>", ""),
-                Arguments.of("<head><title>wemakeprice!@#$%^&*();`~:\'\"</title></head>", "wemakeprice"),
-                Arguments.of("<img src=\"./image.jpg\"/>", ""),
-                Arguments.of("<script>alert('hello');!@#$%^&*();`~:\'\"</script>", "alerthello"),
-                Arguments.of("simple text!@#$%^&*();`~:\'\"", "simpletext")
+                Arguments.of("<head><title>위메프 사전과제!@#$%^&*();`~:\'\"</title></head>",5,  "", ""),
+                Arguments.of("<head><title>WemaKepriCe!@#$%^&*();`~:\'\"</title></head>", 5,  "aCeee,iKmpr", "W"),
+                Arguments.of("<img src=\"./image.jpg\"/>", 5, "", ""),
+                Arguments.of("<script>alert('HellO12');!@#$%^&*();`~:\'\"</script>", 5, "a1e2e,HlllO", "rt"),
+                Arguments.of("simple text!@#$%^&*();`~:\'\"", 5, "eeilm,psttx", "")
         );
     }
 }

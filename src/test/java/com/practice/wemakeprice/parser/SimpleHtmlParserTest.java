@@ -21,29 +21,31 @@ public class SimpleHtmlParserTest {
 
     @ParameterizedTest
     @MethodSource("testcase")
-    public void Text_전체_테스트(String input, String expected) {
+    public void Text_전체_테스트(String input, int chunkNum, String expectedQ, String expectedR) {
 
         //stubbing
         when(webRequest.get()).thenReturn(input);
 
         // given
-        SimpleHtmlParser simpleHtmlParser = new SimpleHtmlParser(webRequest);
+        Parser simpleHtmlParser = new SimpleHtmlParser(webRequest, chunkNum);
 
         // when
-        String cleanData = simpleHtmlParser.parse();
+        Parser.Result result = simpleHtmlParser.parse();
 
         // then
-        assertThat(cleanData, equalTo(expected));
+        assertThat(result.getQuotient(), equalTo(expectedQ));
+        assertThat(result.getRemainder(), equalTo(expectedR));
+
     }
 
     // 검증을 위한 테스트 케이스.
     private static Stream<Arguments> testcase() { // argument source method
         return Stream.of(
-                Arguments.of("<head><title>위메프 사전과제</title></head>", "headtitletitlehead"),
-                Arguments.of("<head><title>wemakeprice!@#$%^&*();`~:\'\"</title></head>", "headtitlewemakepricetitlehead"),
-                Arguments.of("<img src=\"./image.jpg\"/>", "imgsrcimagejpg"),
-                Arguments.of("<script>alert('hello');!@#$%^&*();`~:\'\"</script>", "scriptalerthelloscript"),
-                Arguments.of("simple text!@#$%^&*();`~:\'\"", "simpletext")
+                Arguments.of("<head><title>위메프 사전과제</title></head>", 5, "aadde,eeehh,iillt", "ttt"),
+                Arguments.of("<head><title>wemakeprice!@#$%^&*();`~:\'\"</title></head>", 5,  "aaacd,deeee,eeehh,iiikl,lmprt", "tttw"),
+                Arguments.of("<img src=\"./image.jpg\"/>", 5, "acegg,giijm", "mprs"),
+                Arguments.of("<script>alert('hello');!@#$%^&*();`~:\'\"</script>", 5,  "accee,hiill,loppr,rrsst", "tt"),
+                Arguments.of("simple text!@#$%^&*();`~:'", 5, "eeilm,psttx", "")
         );
     }
 }

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class PageParseResultVoTest {
+public class PageParseVoTest {
 
     private final String tc = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
 
@@ -14,7 +14,7 @@ public class PageParseResultVoTest {
 
         // given
         //when
-        PageParseResultVo result = new PageParseResultVo(tc);
+        PageParseVo result = new PageParseVo(tc);
 
         //then
         String expect = "A0a1B2b3C4c5D6d7E8e9FfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz";
@@ -28,10 +28,10 @@ public class PageParseResultVoTest {
         int chunkNumber = 10;
         String expectedQuotient = "A0a1B2b3C4,c5D6d7E8e9,FfGgHhIiJj,KkLlMmNnOo,PpQqRrSsTt,UuVvWwXxYy";
         String expectedRemainder = "Zz";
-        PageParseResultVo pageParseResultVo = new PageParseResultVo(tc);
+        PageParseVo pageParseResultVo = new PageParseVo(tc);
 
         //when
-        PageParseResultVo.Result result = pageParseResultVo.getResult(chunkNumber);
+        PageParseVo.Result result = pageParseResultVo.getResult(chunkNumber);
 
         //then
         assertThat(result.getQuotient(), equalTo(expectedQuotient));

@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PageParseResultVo {
+public class PageParseVo {
     private final NumberListVo numberListVo;
     private final AlphabetPairListVo alphabetPairListVo;
     private final String crossStringResult;
 
-    public PageParseResultVo(String dirty){
+    public PageParseVo(String dirty){
         String clean = StringUtil.removeAllExceptEnAndNum(dirty);
         NumberAlphabetSplit numAlphabetSplit = new NumberAlphabetSplit(clean);
         this.numberListVo = new NumberListVo(numAlphabetSplit.number);

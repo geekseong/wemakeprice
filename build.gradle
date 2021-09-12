@@ -20,6 +20,9 @@ repositories {
 
 dependencies {
 
+	// https://mvnrepository.com/artifact/org.jsoup/jsoup
+	implementation 'org.jsoup:jsoup:1.13.1'
+
 	// https://mvnrepository.com/artifact/org.mockito/mockito-core
 	testImplementation 'org.mockito:mockito-core:3.12.4'
 

@@ -9,7 +9,7 @@ public class SimpleHtmlParser extends Parser {
     }
 
     @Override
-    protected String afterFetchDo(String html) {
+    protected String parseByParserType(String html) {
         return html;
     }
 }

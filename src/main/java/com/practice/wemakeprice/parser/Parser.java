@@ -25,7 +25,7 @@ public abstract class Parser {
         String data = webRequest.get();
 
         // type별 파싱
-        String parsedData = afterFetchDo(data);
+        String parsedData = parseByParserType(data);
 
         // 숫자, 영어외의 문자 제거.
         String removeExceptNumAndEn = removeExceptNumAndEn(parsedData);
@@ -37,7 +37,7 @@ public abstract class Parser {
         return getResult(crossStringResult);
     }
 
-    protected abstract String afterFetchDo(String data);
+    protected abstract String parseByParserType(String data);
 
     private String removeExceptNumAndEn(String parsedData) {
         return parsedData.replaceAll(EXCEPT_EN_AND_NUM_REGEX, "");

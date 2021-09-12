@@ -22,8 +22,8 @@ public class PageParseRequestDto {
         return type;
     }
 
-    public void setType(ParserType type) {
-        this.type = type;
+    public void setType(String type) {
+        this.type = ParserType.from(type);
     }
 
     public int getChunkNum() {

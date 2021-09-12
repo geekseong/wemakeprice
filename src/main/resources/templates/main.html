@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <title>위메프 과제</title>
+        <style>
+          .block-item{
+            padding-bottom: 10px;
+          }
+        </style>
+    </head>
+
+    <body>
+        <div>
+            <div>
+                <div>
+                    <h3>[ 입력 ]</h3>
+                </div>
+                <div class="block-item">
+                    <span>URL</span>
+                    <input id="url" type="text" placeholder="URL을 입력해주세요.">
+                </div>
+                <div class="block-item">
+                    <span>Type</span>
+                    <select id="type" name="type">
+                        <option value="REMOVE_TAG" selected="selected">HTML 태그 제외</option>
+                        <option value="INCLUDE_TAG">Text 전체</option>
+                    </select>
+                </div>
+                <div class="block-item">
+                    <span>출력단위묶음</span>
+                    <input id="chunkNum" type="text" placeholder="URL을 입력해주세요.">
+                </div>
+                <div>
+                    <input id="submit" type="button" value="출력" onclick="submit()">
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <h3>[ 출력 ]</h3>
+                </div>
+
+                <div class="block-item">
+                    <span>몫 : </span><span id="quotient"></span>
+                </div>
+
+                <div class="block-item">
+                    <span>나머지 : </span><span id="remainder"></span>
+                </div>
+            </div>
+
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <script>
+            function submit(){
+                var url = $("#url").val();
+                var type = $("#type").val();
+                var chunkNum = $("chunkNum").val();
+
+                var data = {
+                    url: $("#url").val(),
+                    type : $("#type").val(),
+                    chunkNum : $("chunkNum").val()
+                };
+
+                $.ajax({
+                    url: "/result",
+                    method: 'post',
+                    contentType : 'application/json',
+                    data: JSON.stringify(data),
+                    success: function( result ) {
+                        $("#quotient").text(result.quotient);
+                        $("#remainder").text(result.remainder);
+
+                    },
+                    error : function(err) {
+                        console.log(err);
+                    }
+                });
+            }
+        </script>
+    </body>
+
+</html>

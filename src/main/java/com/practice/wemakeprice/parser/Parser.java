@@ -33,10 +33,11 @@ public abstract class Parser {
         // 교차출력물 만들기.
         String crossStringResult = makeCrossStringResult(removeExceptNumAndEn);
 
-        // 결과 리턴
-        return getResult(crossStringResult);
+        // 몫, 나머지를 구한다.
+        return getQuotientAndRemainder(crossStringResult);
     }
 
+    // 타입별로 상속받아서 재정의 할 수 있도록 추상매서드로 생성.
     protected abstract String parseByParserType(String data);
 
     private String removeExceptNumAndEn(String parsedData) {
@@ -44,9 +45,9 @@ public abstract class Parser {
     }
     private String makeCrossStringResult(String parsedData) {
 
-        NumberAlphabetSplit numberAlphabetSplit = new NumberAlphabetSplit(parsedData);
-        NumberListVo numberListVo = new NumberListVo(numberAlphabetSplit.number);
-        AlphabetPairListVo alphabetPairListVo = new AlphabetPairListVo(numberAlphabetSplit.alphabet);
+        NumberAlphabetSplit numberAlphabetSplit = getNumberAlphabetSplit(parsedData);
+        NumberListVo numberListVo = new NumberListVo(numberAlphabetSplit.getNumber());
+        AlphabetPairListVo alphabetPairListVo = new AlphabetPairListVo(numberAlphabetSplit.getAlphabet());
 
         StringBuilder builder = new StringBuilder();
         while (!alphabetPairListVo.isAllAlphabetEmpty() || !numberListVo.isAllNumberEmpty()) {
@@ -62,36 +63,57 @@ public abstract class Parser {
         return builder.toString();
     }
 
-    public Result getResult(String data) {
-        return new Result(data, chunkNum);
+    private NumberAlphabetSplit getNumberAlphabetSplit(String data){
+        StringBuilder numberBuilder = new StringBuilder();
+        StringBuilder alphabetBuilder = new StringBuilder();
+
+        for (int i = 0; i < data.length(); ++i){
+            char ch = data.charAt(i);
+            if (CharUtil.isNumber(ch)) {
+                numberBuilder.append(ch);
+            } else if (CharUtil.isLowerCase(ch) || CharUtil.isUpperCase(ch)) {
+                alphabetBuilder.append(ch);
+            } else {
+                throw new UnSupportedCharacterException("숫자, 소문자, 대문자만 입력 가능합니다. your input : '" + ch+"'");
+            }
+        }
+
+        return new NumberAlphabetSplit(numberBuilder.toString(), alphabetBuilder.toString());
     }
 
+    private Result getQuotientAndRemainder(String data) {
+
+        if (chunkNum == 0) {
+            return new Result(data);
+        }
+
+        else{
+            int offset = 0;
+            int q = data.length() / chunkNum;
+
+            List<String> chunkList = new ArrayList<>();
+            for (; offset < q * chunkNum; offset += chunkNum) {
+                chunkList.add(data.substring(offset, offset + chunkNum));
+            }
+
+            String quotient = chunkList.stream().collect(Collectors.joining(","));
+            String remainder = data.substring(offset);
+            return new Result(quotient, remainder);
+        }
+    }
 
     public class Result{
         private final String quotient;
         private final String remainder;
 
-        public Result(String crossStringResult, int chunkNum) {
+        public Result(String quotient) {
+            this.quotient = quotient;
+            this.remainder = "";
+        }
 
-            if (chunkNum == 0) {
-                this.quotient = crossStringResult;
-                this.remainder = "";
-            }
-
-            else{
-                int offset = 0;
-                int q = crossStringResult.length() / chunkNum;
-
-                List<String> chunkList = new ArrayList<>();
-                for (; offset < q * chunkNum; offset += chunkNum) {
-                    chunkList.add(crossStringResult.substring(offset, offset + chunkNum));
-                }
-
-                this.quotient = chunkList.stream().collect(Collectors.joining(","));
-                this.remainder = crossStringResult.substring(offset);
-            }
-
-
+        public Result(String quotient, String remainder) {
+            this.quotient = quotient;
+            this.remainder = remainder;
         }
 
         public String getQuotient() {
@@ -107,23 +129,17 @@ public abstract class Parser {
         private final String number;
         private final String alphabet;
 
-        public NumberAlphabetSplit(String rawData) {
-            StringBuilder numberBuilder = new StringBuilder();
-            StringBuilder alphabetBuilder = new StringBuilder();
+        public NumberAlphabetSplit(String number, String alphabet) {
+            this.number = number;
+            this.alphabet = alphabet;
+        }
 
-            for (int i = 0; i < rawData.length(); ++i){
-                char ch = rawData.charAt(i);
-                if (CharUtil.isNumber(ch)) {
-                    numberBuilder.append(ch);
-                } else if (CharUtil.isLowerCase(ch) || CharUtil.isUpperCase(ch)) {
-                    alphabetBuilder.append(ch);
-                } else {
-                    throw new UnSupportedCharacterException("숫자, 소문자, 대문자만 입력 가능합니다. your input : '" + ch+"'");
-                }
-            }
+        public String getNumber() {
+            return number;
+        }
 
-            this.number = numberBuilder.toString();
-            this.alphabet = alphabetBuilder.toString();
+        public String getAlphabet() {
+            return alphabet;
         }
     }
 }

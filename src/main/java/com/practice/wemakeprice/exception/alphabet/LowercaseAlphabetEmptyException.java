@@ -1,6 +1,8 @@
 package com.practice.wemakeprice.exception.alphabet;
 
-public class LowercaseAlphabetEmptyException extends RuntimeException{
+import com.practice.wemakeprice.exception.WemakepriceException;
+
+public class LowercaseAlphabetEmptyException extends WemakepriceException {
     public LowercaseAlphabetEmptyException(String message) {
         super(message);
     }

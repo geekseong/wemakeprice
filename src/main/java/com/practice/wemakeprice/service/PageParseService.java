@@ -2,6 +2,7 @@ package com.practice.wemakeprice.service;
 
 import com.practice.wemakeprice.dto.PageParseResponseDto;
 import com.practice.wemakeprice.dto.PageParseRequestDto;
+import com.practice.wemakeprice.enumtype.ParserType;
 import com.practice.wemakeprice.parser.ParserFactory;
 import com.practice.wemakeprice.parser.Parser;
 import org.springframework.stereotype.Service;

@@ -73,16 +73,25 @@ public abstract class Parser {
 
         public Result(String crossStringResult, int chunkNum) {
 
-            int offset = 0;
-            int q = crossStringResult.length() / chunkNum;
-
-            List<String> chunkList = new ArrayList<>();
-            for (; offset < q * chunkNum; offset += chunkNum) {
-                chunkList.add(crossStringResult.substring(offset, offset + chunkNum));
+            if (chunkNum == 0) {
+                this.quotient = crossStringResult;
+                this.remainder = "";
             }
 
-            this.quotient = chunkList.stream().collect(Collectors.joining(","));
-            this.remainder = crossStringResult.substring(offset);
+            else{
+                int offset = 0;
+                int q = crossStringResult.length() / chunkNum;
+
+                List<String> chunkList = new ArrayList<>();
+                for (; offset < q * chunkNum; offset += chunkNum) {
+                    chunkList.add(crossStringResult.substring(offset, offset + chunkNum));
+                }
+
+                this.quotient = chunkList.stream().collect(Collectors.joining(","));
+                this.remainder = crossStringResult.substring(offset);
+            }
+
+
         }
 
         public String getQuotient() {

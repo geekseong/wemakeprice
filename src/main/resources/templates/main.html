@@ -5,6 +5,11 @@
           .block-item{
             padding-bottom: 10px;
           }
+
+          #error-mgs{
+            color:red;
+          }
+
         </style>
     </head>
 
@@ -27,7 +32,7 @@
                 </div>
                 <div class="block-item">
                     <span>출력단위묶음</span>
-                    <input id="chunkNum" type="text" placeholder="URL을 입력해주세요.">
+                    <input id="chunkNum" type="number" placeholder="URL을 입력해주세요.">
                 </div>
                 <div>
                     <input id="submit" type="button" value="출력" onclick="submit()">
@@ -46,6 +51,9 @@
                 <div class="block-item">
                     <span>나머지 : </span><span id="remainder"></span>
                 </div>
+            </div>
+            <div>
+                <span id="error-mgs"></span>
             </div>
 
         </div>
@@ -68,10 +76,13 @@
                     success: function( result ) {
                         $("#quotient").text(result.quotient);
                         $("#remainder").text(result.remainder);
+                        $("#error-mgs").text("");
 
                     },
                     error : function(err) {
-                        console.log(err);
+                        $("#quotient").text("");
+                        $("#remainder").text("");
+                        $("#error-mgs").text(err.responseText);
                     }
                 });
             }

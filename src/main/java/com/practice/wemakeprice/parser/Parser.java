@@ -3,7 +3,6 @@ package com.practice.wemakeprice.parser;
 import com.practice.wemakeprice.exception.UnSupportedCharacterException;
 import com.practice.wemakeprice.infra.WebRequest;
 import com.practice.wemakeprice.utils.StringUtil;
-import com.practice.wemakeprice.vo.PageParseVo;
 import com.practice.wemakeprice.vo.alphabet.AlphabetPairListVo;
 import com.practice.wemakeprice.vo.number.NumberListVo;
 

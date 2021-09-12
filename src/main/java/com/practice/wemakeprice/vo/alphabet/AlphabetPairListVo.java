@@ -4,7 +4,7 @@ import com.practice.wemakeprice.exception.UnSupportedCharacterException;
 import com.practice.wemakeprice.exception.alphabet.AlphabetEmptyException;
 import com.practice.wemakeprice.exception.alphabet.LowercaseAlphabetEmptyException;
 import com.practice.wemakeprice.exception.alphabet.UppercaseAlphabetEmptyException;
-import com.practice.wemakeprice.utils.StringUtil;
+import com.practice.wemakeprice.utils.CharUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,9 +31,9 @@ public class AlphabetPairListVo {
 
         for (int i = 0; i < rawData.length(); ++i) {
             char ch = rawData.charAt(i);
-            if (StringUtil.isLowerCase(ch)) {
+            if (CharUtil.isLowerCase(ch)) {
                 lowercaseCount[ch - 'a']++;
-            } else if (StringUtil.isUpperCase(ch)) {
+            } else if (CharUtil.isUpperCase(ch)) {
                 uppercaseCount[ch - 'A']++;
             } else{
                 throw new UnSupportedCharacterException("소문자, 대문자만 입력 가능합니다. your input : '" + ch+"'");

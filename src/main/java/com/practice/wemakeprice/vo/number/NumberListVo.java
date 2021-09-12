@@ -2,7 +2,7 @@ package com.practice.wemakeprice.vo.number;
 
 import com.practice.wemakeprice.exception.number.NumberEmptyException;
 import com.practice.wemakeprice.exception.UnSupportedCharacterException;
-import com.practice.wemakeprice.utils.StringUtil;
+import com.practice.wemakeprice.utils.CharUtil;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -24,7 +24,7 @@ public class NumberListVo {
 
         for (int i = 0; i < rawData.length(); ++i) {
             char ch = rawData.charAt(i);
-            if (StringUtil.isNumber(ch)) {
+            if (CharUtil.isNumber(ch)) {
                 numberCountTable[ch - '0']++;
             } else{
                 throw new UnSupportedCharacterException("숫자만 입력 가능합니다. your input : '" + ch+"'");

@@ -1,16 +1,12 @@
 package com.practice.wemakeprice.parser;
 
 import com.practice.wemakeprice.infra.WebRequest;
-import com.practice.wemakeprice.utils.StringUtil;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;

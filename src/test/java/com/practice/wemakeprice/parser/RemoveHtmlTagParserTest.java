@@ -30,7 +30,7 @@ public class RemoveHtmlTagParserTest {
         Parser removeHtmlTagParser = new RemoveHtmlTagParser(webRequest, chunkNum);
 
         // when
-        Parser.Result result = removeHtmlTagParser.parse();
+        Parser.ParserResult result = removeHtmlTagParser.parse();
 
         // then
         assertThat(result.getQuotient(), equalTo(expectedQ));

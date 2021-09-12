@@ -19,7 +19,7 @@ public abstract class Parser {
         this.chunkNum = chunkNum;
     }
 
-    public Result parse(){
+    public ParserResult parse(){
 
         // url 요청
         String data = webRequest.get();
@@ -81,10 +81,10 @@ public abstract class Parser {
         return new NumberAlphabetSplit(numberBuilder.toString(), alphabetBuilder.toString());
     }
 
-    private Result getQuotientAndRemainder(String data) {
+    private ParserResult getQuotientAndRemainder(String data) {
 
         if (chunkNum == 0) {
-            return new Result(data);
+            return new ParserResult(data);
         }
 
         else{
@@ -98,20 +98,20 @@ public abstract class Parser {
 
             String quotient = chunkList.stream().collect(Collectors.joining(","));
             String remainder = data.substring(offset);
-            return new Result(quotient, remainder);
+            return new ParserResult(quotient, remainder);
         }
     }
 
-    public class Result{
+    public class ParserResult {
         private final String quotient;
         private final String remainder;
 
-        public Result(String quotient) {
+        public ParserResult(String quotient) {
             this.quotient = quotient;
             this.remainder = "";
         }
 
-        public Result(String quotient, String remainder) {
+        public ParserResult(String quotient, String remainder) {
             this.quotient = quotient;
             this.remainder = remainder;
         }

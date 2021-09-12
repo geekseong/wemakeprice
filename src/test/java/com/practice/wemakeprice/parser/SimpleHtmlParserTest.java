@@ -30,7 +30,7 @@ public class SimpleHtmlParserTest {
         Parser simpleHtmlParser = new SimpleHtmlParser(webRequest, chunkNum);
 
         // when
-        Parser.Result result = simpleHtmlParser.parse();
+        Parser.ParserResult result = simpleHtmlParser.parse();
 
         // then
         assertThat(result.getQuotient(), equalTo(expectedQ));

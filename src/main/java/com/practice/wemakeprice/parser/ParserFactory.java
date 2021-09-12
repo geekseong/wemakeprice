@@ -6,7 +6,7 @@ import com.practice.wemakeprice.infra.WebRequest;
 
 public class ParserFactory {
 
-    public static Parser getParser(String url, ParserType parserType, int chunkNum) {
+    public static Parser getParser(String url, ParserType parserType, int chunkNum)  {
 
         // HTML 태그 포함 전체 파서( HTML TAG 포함 )
         if( parserType.equals(ParserType.INCLUDE_TAG) )

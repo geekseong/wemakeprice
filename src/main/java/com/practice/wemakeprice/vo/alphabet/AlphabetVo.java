@@ -15,13 +15,6 @@ class AlphabetVo {
         return alphabet;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public void increaseCount(){
-        this.count++;
-    }
     public char consume(){
         if (!isEmpty()) {
             this.count--;

@@ -16,13 +16,6 @@ class NumberVo {
         this.count = count;
     }
 
-    public void increaseNumCount() {
-        this.count++;
-    }
-    public int getNum() {
-        return num;
-    }
-
     public boolean isEmpty() {
         return this.count == 0;
     }
